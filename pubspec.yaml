@@ -1,0 +1,63 @@
+name: music_streaming_app
+description: "A new Flutter project."
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  auto_route: ^7.8.4
+  camera: ^0.11.0+2
+  cupertino_icons: ^1.0.8
+  easy_localization: ^3.0.7
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.6
+  flutter_rating_bar: ^4.0.1
+  flutter_svg: ^2.0.14
+  freezed: ^2.5.7
+  freezed_annotation: ^2.4.4
+  get_it: ^8.0.2
+  google_mobile_ads: ^5.2.0
+  json_annotation: ^4.9.0
+  path_provider: ^2.1.5
+  provider: ^6.1.2
+  shared_preferences: ^2.3.2
+  sqflite: ^2.4.0
+
+dev_dependencies:
+  analyzer_rules:
+    path: ./lib/core/analyzer_rules
+  auto_route_generator: ^7.3.2
+  build_runner: ^2.4.13
+  flutter_lints: ^4.0.0
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^6.8.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/translations/
+    - assets/fonts/
+    - assets/icons/
+
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Lato-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Lato-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Lato-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Lato-Black.ttf
+          weight: 900
+  

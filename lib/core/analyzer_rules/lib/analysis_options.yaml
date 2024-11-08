@@ -1,0 +1,70 @@
+include: package:analyzer_rules/analysis_options.1.0.0.yaml
+
+analyzer:
+  plugins:
+    - dart_code_metrics
+
+  exclude:
+    - lib/**/*swagger*.dart
+    - lib/**/*freezed.dart
+    - lib/**/*gr.dart
+    - lib/**l10n**
+    - lib/**icons**
+    - lib/**font**
+    - lib/**firebase_options**
+    - "**/*.gen.dart"
+    - "**/*.chopper.dart"
+
+linter:
+  rules:
+    use_super_parameters: true
+    avoid_positional_boolean_parameters: false
+
+dart_code_metrics:
+  metrics:
+    number-of-methods: 15
+
+  metrics-exclude:
+    - lib/**fake**
+
+  rules:
+    - always-remove-listener
+    - avoid-expanded-as-spacer
+    - avoid-redundant-async
+    - ban-name:
+        entries:
+          - ident: emit
+            description: Use safeEmit instead, see https://github.com/felangel/bloc/issues/3069.
+
+    - format-comment: false
+
+    - member-ordering:
+        order:
+          - constructors
+          - public-fields
+          - private-fields
+          - public-getters
+          - private-getters
+          - public-setters
+          - private-setters
+          - public-methods
+        widgets-order:
+          - init-state-method
+          - did-change-dependencies-method
+          - did-update-widget-method
+          - dispose-method
+          - build-method
+          - private-methods
+
+    - no-equal-arguments:
+        exclude:
+          - lib/**
+
+    - no-magic-number:
+        exclude:
+          - lib/**presentation**
+          - lib/**fake**
+
+    - use-setstate-synchronously:
+        methods:
+          - setState

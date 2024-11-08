@@ -1,0 +1,8 @@
+{
+  "dart.flutterSdkPath": ".fvm/versions/3.24.4",
+  "build-runner.flutterPath": ".fvm/versions/3.24.4/bin/flutter",
+  "dart.lineLength": 100,
+  "cSpell.words": [
+    "unawaited"
+  ]
+}

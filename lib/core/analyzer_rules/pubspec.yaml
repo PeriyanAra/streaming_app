@@ -1,0 +1,7 @@
+name: analyzer_rules
+description: Includes analyzer settings and best practices
+version: 1.0.0
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: ">=3.20.0"
