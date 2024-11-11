@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:music_streaming_app/core/core.dart';
+import 'package:sentry/sentry.dart';
 
 base mixin SafeExecutionMixin {
   Future<R> executeSafely<R>(
@@ -11,8 +12,12 @@ base mixin SafeExecutionMixin {
     try {
       return await executeCallback();
     } on FailureResult catch (error) {
+      unawaited(Sentry.captureException(error));
+
       return onError(error);
     } on CameraException catch (error, stackTrace) {
+      unawaited(Sentry.captureException(error, stackTrace: stackTrace));
+
       final errorMessage = switch (error.code) {
         'CameraAccessDenied' || 'CameraAccessDeniedWithoutPrompt' => 'cameraAccessDenied',
         'CameraAccessRestricted' => 'cameraAccessRestricted',
@@ -27,6 +32,8 @@ base mixin SafeExecutionMixin {
 
       return onError(failureResult);
     } on Exception catch (error, stackTrace) {
+      unawaited(Sentry.captureException(error, stackTrace: stackTrace));
+
       final failureResult = FailureResult(
         reason: FailureReasons.unknown,
         debugMessage: '$error\n$stackTrace',
@@ -35,6 +42,8 @@ base mixin SafeExecutionMixin {
 
       return onError(failureResult);
     } on Object catch (error, stackTrace) {
+      unawaited(Sentry.captureException(error, stackTrace: stackTrace));
+
       final failureResult = FailureResult(
         reason: FailureReasons.unknown,
         debugMessage: '$error\n$stackTrace',

@@ -3,8 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:music_streaming_app/core/core.dart';
 
-class AdService {
+final class AdService with SafeExecutionMixin {
   final adUnitId = Platform.isAndroid
       ? 'ca-app-pub-3940256099942544/9214589741'
       : 'ca-app-pub-3940256099942544/2435281174';
@@ -12,44 +13,45 @@ class AdService {
   BannerAd? bannerAd;
 
   Future<BannerAd?> loadAd(BuildContext context) async {
-    try {
-      final size = await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
-        MediaQuery.sizeOf(context).width.truncate(),
-      );
-
-      final width = context.mounted ? MediaQuery.of(context).size.width.toInt() : 300;
-
-      if (bannerAd == null) {
-        bannerAd = BannerAd(
-          adUnitId: adUnitId,
-          request: const AdRequest(),
-          size: size ??
-              AdSize(
-                width: width,
-                height: 60,
-              ),
-          listener: BannerAdListener(
-            // Called when an ad is successfully received.
-            onAdLoaded: (ad) {
-              debugPrint('$ad loaded.');
-            },
-            // Called when an ad request failed.
-            onAdFailedToLoad: (ad, err) {
-              debugPrint('BannerAd failed to load: $err');
-              // Dispose the ad here to free resources.
-              ad.dispose();
-            },
-          ),
+    return executeSafely(
+      () async {
+        final size = await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+          MediaQuery.sizeOf(context).width.truncate(),
         );
 
-        unawaited(bannerAd?.load());
-      }
+        final width = context.mounted ? MediaQuery.of(context).size.width.toInt() : 300;
 
-      if (bannerAd != null) return bannerAd!;
+        if (bannerAd == null) {
+          bannerAd = BannerAd(
+            adUnitId: adUnitId,
+            request: const AdRequest(),
+            size: size ??
+                AdSize(
+                  width: width,
+                  height: 60,
+                ),
+            listener: BannerAdListener(
+              // Called when an ad is successfully received.
+              onAdLoaded: (ad) {
+                debugPrint('$ad loaded.');
+              },
+              // Called when an ad request failed.
+              onAdFailedToLoad: (ad, err) {
+                debugPrint('BannerAd failed to load: $err');
+                // Dispose the ad here to free resources.
+                ad.dispose();
+              },
+            ),
+          );
 
-      return null;
-    } catch (e) {
-      return null;
-    }
+          unawaited(bannerAd?.load());
+        }
+
+        if (bannerAd != null) return bannerAd;
+
+        return null;
+      },
+      onError: (_) => null,
+    );
   }
 }

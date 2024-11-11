@@ -12,6 +12,7 @@ dependencies:
   auto_route: ^7.8.4
   camera: ^0.11.0+2
   cupertino_icons: ^1.0.8
+  dotenv: ^4.2.0
   easy_localization: ^3.0.7
   flutter:
     sdk: flutter
@@ -25,6 +26,7 @@ dependencies:
   json_annotation: ^4.9.0
   path_provider: ^2.1.5
   provider: ^6.1.2
+  sentry: ^8.10.1
   shared_preferences: ^2.3.2
   sqflite: ^2.4.0
 

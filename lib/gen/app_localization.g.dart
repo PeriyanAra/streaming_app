@@ -20,11 +20,8 @@ class CodegenLoader extends AssetLoader{
   "defaultErrorMessage": "Something went wrong!. Please try again later. If problem not fix connect us 'suporttest@gmail.com'",
   "cameraAccessDenied": "To use this feature, please go to the Settings app and enable camera access.",
   "cameraAccessRestricted": "To use this feature, please go to the Settings app and enable camera access.",
-<<<<<<< HEAD
   "continueText": "Continue",
-=======
   "continue": "Continue",
->>>>>>> 27dd8d6d5952460fe06765e58ec7bb804b710a8b
   "ok": "Ok",
   "error_header": "Oops, we have an error",
   "birthdayStepTitle": "When’s your\nbirthday?",
