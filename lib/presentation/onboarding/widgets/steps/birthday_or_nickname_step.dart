@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_streaming_app/core/core.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 import 'package:music_streaming_app/presentation/common/common.dart';
 import 'package:music_streaming_app/presentation/onboarding/cubit/validator_cubit.dart';
 import 'package:music_streaming_app/presentation/onboarding/theme/birthday_or_nickname_step_theme.dart';
@@ -36,6 +36,7 @@ class _BirthdayOrNicknameStepState extends State<BirthdayOrNicknameStep> {
   final FocusNode _monthFocusNode = FocusNode();
   final FocusNode _yearFocusNode = FocusNode();
   final FocusNode _nicknameFocusNode = FocusNode();
+  String errorText = '';
   Completer<void>? completer;
 
   @override
@@ -67,9 +68,11 @@ class _BirthdayOrNicknameStepState extends State<BirthdayOrNicknameStep> {
             } else if (state is ValidatorinvalidState && context.mounted) {
               DialogHelper.show(
                 context,
-                title: widget.isBirthdayStep ? 'invalidDate'.tr() : 'invalidNickname'.tr(),
-                buttonText: 'ok'.tr(),
+                title: widget.isBirthdayStep ? t.invalidDate : t.invalidNickname,
+                buttonText: t.ok,
               );
+
+              errorText = widget.isBirthdayStep ? t.invalidDate : t.invalidNickname;
             }
           },
           builder: (context, state) {
@@ -89,9 +92,7 @@ class _BirthdayOrNicknameStepState extends State<BirthdayOrNicknameStep> {
                     ),
                     HBox(height: onboardingTheme.titleTopSpacing),
                     StepTitleSection(
-                      title: widget.isBirthdayStep
-                          ? 'birthdayStepTitle'.tr()
-                          : 'niknameStepTitle'.tr(),
+                      title: widget.isBirthdayStep ? t.birthdayStepTitle : t.niknameStepTitle,
                     ),
                     HBox(
                       height: onboardingTheme.titleBottomSpacing,
@@ -117,7 +118,7 @@ class _BirthdayOrNicknameStepState extends State<BirthdayOrNicknameStep> {
                               ),
                               HBox(height: birthdayStepTheme.bottomTextTopSpace),
                               Text(
-                                'day'.tr(),
+                                t.day,
                                 style: birthdayStepTheme.bottomTextStyle,
                               ),
                             ],
@@ -141,7 +142,7 @@ class _BirthdayOrNicknameStepState extends State<BirthdayOrNicknameStep> {
                               ),
                               HBox(height: birthdayStepTheme.bottomTextTopSpace),
                               Text(
-                                'month'.tr(),
+                                t.month,
                                 style: birthdayStepTheme.bottomTextStyle,
                               ),
                             ],
@@ -160,7 +161,7 @@ class _BirthdayOrNicknameStepState extends State<BirthdayOrNicknameStep> {
                               ),
                               HBox(height: birthdayStepTheme.bottomTextTopSpace),
                               Text(
-                                'year'.tr(),
+                                t.year,
                                 style: birthdayStepTheme.bottomTextStyle,
                               ),
                             ],

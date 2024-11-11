@@ -1,6 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 import 'package:music_streaming_app/presentation/common/common.dart';
 import 'package:music_streaming_app/presentation/onboarding/theme/theme.dart';
 import 'package:music_streaming_app/presentation/onboarding/widgets/steps_indicator.dart';
@@ -35,12 +36,12 @@ class FirstPhotoStep extends StatelessWidget {
             ),
             HBox(height: onboardingTheme.titleTopSpacing),
             StepTitleSection(
-              title: 'firstPhotoStepTitle'.tr(),
+              title: t.firstPhotoStepTitle,
             ),
             HBox(height: onboardingTheme.titleBottomSpacing),
             PrimaryButton(
               onTap: onFinish,
-              text: 'firstPhoto'.tr(),
+              text: t.firstPhoto,
             ),
             HBox(height: onboardingTheme.firstPhotoButtonBottomSpacing),
             Container(
@@ -51,22 +52,22 @@ class FirstPhotoStep extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'imageGuidelinesTitle'.tr(),
+                    t.imageGuidelinesTitle,
                     style: onboardingTheme.imageGuidelineTitleTextStyle,
                   ),
                   HBox(height: onboardingTheme.guidelineTextSpace),
                   _buildChecklistItem(
-                    'imageGuidelinesFirstText'.tr(),
+                    t.imageGuidelinesFirstText,
                     context,
                   ),
                   HBox(height: onboardingTheme.guidelineTextSpace),
                   _buildChecklistItem(
-                    'imageGuidelinesSecondText'.tr(),
+                    t.imageGuidelinesSecondText,
                     context,
                   ),
                   HBox(height: onboardingTheme.guidelineTextSpace),
                   _buildChecklistItem(
-                    'imageGuidelinesThirdText'.tr(),
+                    t.imageGuidelinesThirdText,
                     context,
                   ),
                 ],

@@ -1,9 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:music_streaming_app/data/settings/settings_repository.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 import 'package:music_streaming_app/presentation/common/helpers/dialog_helper.dart';
 import 'package:music_streaming_app/presentation/setting/widget/settings_data_helper_class.dart';
 import 'package:music_streaming_app/presentation/theme/music_streaming_colors_palette.dart';
@@ -52,7 +52,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     if (settingsInfo['unlock_app'] == false || settingsInfo.isEmpty) {
       settingsOnTapList.add(
         SettingsData(
-          title: 'unlockApp'.tr(),
+          title: t.unlockApp,
           onTap: () {
             add(const SettingsEvent.changeUnlockUppStatus());
           },
@@ -61,7 +61,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
     settingsOnTapList.add(
       SettingsData(
-        title: 'rateUs'.tr(),
+        title: t.rateUs,
         onTap: () {
           DialogHelper.show(
             context,
@@ -93,7 +93,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         if (state is SettingsLoadedState) {
           final currentState = state as SettingsLoadedState;
           final updatedSettingsData = [...currentState.settingsHelper]
-            ..removeWhere((settingsData) => settingsData.title == 'unlockApp'.tr());
+            ..removeWhere((settingsData) => settingsData.title == t.unlockApp);
           emit(SettingsState.loaded(settingsHelper: updatedSettingsData));
         }
       },

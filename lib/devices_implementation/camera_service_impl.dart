@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:music_streaming_app/core/core.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 
 final class CameraServiceImpl with SafeExecutionMixin implements CameraService {
   CameraController? _cameraController;
@@ -91,11 +92,11 @@ final class CameraServiceImpl with SafeExecutionMixin implements CameraService {
         final cameras = await availableCameras();
 
         if (cameras.isEmpty) {
-          return const ResultData.failure(
+          return ResultData.failure(
             FailureResult(
               reason: FailureReasons.unknown,
-              debugMessage: 'Phone not have camera',
-              errorMessage: 'Phone not have camera',
+              debugMessage: t.phoneNotHaveCamera,
+              errorMessage: t.phoneNotHaveCamera,
             ),
           );
         }

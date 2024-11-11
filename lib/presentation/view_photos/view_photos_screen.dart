@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:music_streaming_app/core/core.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 import 'package:music_streaming_app/presentation/capture_photo/theme/theme.dart';
 import 'package:music_streaming_app/presentation/common/common.dart';
 import 'package:music_streaming_app/presentation/router/app_router.gr.dart';
@@ -76,7 +76,7 @@ class _ViewPhotosScreenState extends State<ViewPhotosScreen> {
               builder: (context, state) {
                 if (state is SettingsLoadedState) {
                   final setting = state.settingsHelper
-                      .where((setting) => setting.title == 'unlockApp'.tr())
+                      .where((setting) => setting.title == t.unlockApp)
                       .firstOrNull;
                   if (setting != null) {
                     return AdBanner(

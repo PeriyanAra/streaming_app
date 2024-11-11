@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_streaming_app/core/core.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 import 'package:music_streaming_app/presentation/common/common.dart';
 import 'package:music_streaming_app/presentation/common/helpers/date_time_helper.dart';
 import 'package:music_streaming_app/presentation/setting/settings_bloc/settings_bloc.dart';
@@ -37,7 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           DialogHelper.show(
             context,
             title: errorMsg,
-            buttonText: 'exit'.tr(),
+            buttonText: t.exit,
           );
         }
       },
@@ -66,10 +66,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             orElse: () => null,
                           );
                           return MyAccountSection(
-                            title: 'myAccount'.tr(),
+                            title: t.myAccount,
                             items: [
-                              {'title': 'username'.tr(), 'value': user?.name ?? ''},
-                              {'title': 'birthday'.tr(), 'value': user?.birthday.toStringDDMMMWithYear() ?? ''},
+                              {'title': t.username, 'value': user?.name ?? ''},
+                              {'title': t.birthday, 'value': user?.birthday.toStringDDMMMWithYear(TranslationProvider.of(context).flutterLocale.languageCode) ?? ''},
                             ],
                           );
                         },

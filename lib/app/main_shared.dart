@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:developer' as dev;
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:music_streaming_app/app/restart_widget.dart';
 import 'package:music_streaming_app/core/di/di_get_it_implementation.dart';
 import 'package:music_streaming_app/core/di/register_app_dependencies.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 
 Future<void> mainShared(
   Widget appProvider,
@@ -14,7 +14,7 @@ Future<void> mainShared(
   await runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-      await EasyLocalization.ensureInitialized();
+      await LocaleSettings.useDeviceLocale();
 
       await SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp],
@@ -32,13 +32,7 @@ Future<void> mainShared(
 
       runApp(
         RestartWidget(
-          child: EasyLocalization(
-            supportedLocales: const [
-              Locale('en'),
-            ],
-            path: 'assets/translations',
-            fallbackLocale: const Locale('en'),
-            startLocale: const Locale('en'),
+          child: TranslationProvider(
             child: appProvider,
           ),
           onBeforeRestart: () async {

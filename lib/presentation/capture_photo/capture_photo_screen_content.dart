@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 import 'package:music_streaming_app/presentation/capture_photo/capture_photo_bloc/capture_photo_bloc.dart';
 import 'package:music_streaming_app/presentation/capture_photo/theme/theme.dart';
 import 'package:music_streaming_app/presentation/capture_photo/widgets/widgets.dart';
@@ -57,8 +57,8 @@ class _CapturePhotoScreenContentState extends State<CapturePhotoScreenContent>
             current is CapturePhotoErrorState && current.cameraController != null,
         listener: (context, state) => DialogHelper.show(
           context,
-          buttonText: 'ok'.tr(),
-          title: (state as CapturePhotoErrorState).errorMessage.tr(),
+          buttonText: t.ok,
+          title: (state as CapturePhotoErrorState).errorMessage,
         ),
         buildWhen: (previous, current) => current is! CapturePhotoInitialState,
         builder: (context, state) {
@@ -67,7 +67,7 @@ class _CapturePhotoScreenContentState extends State<CapturePhotoScreenContent>
               alignment: Alignment.center,
               padding: theme.contentSpacing,
               child: Text(
-                state.errorMessage.tr(),
+                state.errorMessage,
                 style: theme.errorTextStyle,
                 textAlign: TextAlign.center,
               ),

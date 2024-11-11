@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:music_streaming_app/core/core.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 
 base mixin SafeExecutionMixin {
   Future<R> executeSafely<R>(
@@ -14,8 +15,8 @@ base mixin SafeExecutionMixin {
       return onError(error);
     } on CameraException catch (error, stackTrace) {
       final errorMessage = switch (error.code) {
-        'CameraAccessDenied' || 'CameraAccessDeniedWithoutPrompt' => 'cameraAccessDenied',
-        'CameraAccessRestricted' => 'cameraAccessRestricted',
+        'CameraAccessDenied' || 'CameraAccessDeniedWithoutPrompt' => t.cameraAccessDenied,
+        'CameraAccessRestricted' => t.cameraAccessRestricted,
         _ => error.description,
       };
 
