@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:music_streaming_app/data/database/initial_scripts.dart';
 import 'package:music_streaming_app/data/database/migrations_scripts.dart';
+import 'package:sentry/sentry.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class DatabaseCreator {
@@ -42,6 +43,8 @@ abstract class DatabaseCreator {
         try {
           await db.execute(script);
         } catch (e) {
+          await Sentry.captureException(e);
+
           debugPrint('Database Error: $e');
         }
       },

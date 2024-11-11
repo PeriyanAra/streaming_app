@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:music_streaming_app/core/core.dart';
 
 part 'validator_state.dart';
 part 'validator_cubit.freezed.dart';
 
-class ValidatorCubit extends Cubit<ValidatorState> {
+final class ValidatorCubit extends Cubit<ValidatorState> with SafeExecutionMixin {
   ValidatorCubit() : super(const ValidatorState.initial());
 
   void checkValidation({
@@ -26,55 +27,56 @@ class ValidatorCubit extends Cubit<ValidatorState> {
       return;
     }
 
-    int day, month, year;
+    executeSafely(
+      () {
+        final day = int.parse(dayStr);
+        final month = int.parse(monthStr);
+        final year = int.parse(yearStr);
 
-    try {
-      day = int.parse(dayStr);
-      month = int.parse(monthStr);
-      year = int.parse(yearStr);
-    } catch (e) {
-      emit(const ValidatorState.invalid());
+        if (day <= 0 || month <= 0 || year <= 0) {
+          emit(const ValidatorState.invalid());
 
-      return;
-    }
+          return;
+        }
 
-    if (day <= 0 || month <= 0 || year <= 0) {
-      emit(const ValidatorState.invalid());
+        if (month < 1 || month > 12) {
+          emit(const ValidatorState.invalid());
 
-      return;
-    }
+          return;
+        }
 
-    if (month < 1 || month > 12) {
-      emit(const ValidatorState.invalid());
+        final currentYear = DateTime.now().year;
+        if (year < 1900 || year > currentYear) {
+          emit(const ValidatorState.invalid());
 
-      return;
-    }
+          return;
+        }
 
-    final currentYear = DateTime.now().year;
-    if (year < 1900 || year > currentYear) {
-      emit(const ValidatorState.invalid());
+        int maxDay;
+        final monthsWith31Days = <int>[1, 3, 5, 7, 8, 10, 12];
 
-      return;
-    }
+        if (month == 2) {
+          final isLeapYear = (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
+          maxDay = isLeapYear ? 29 : 28;
+        } else if (monthsWith31Days.contains(month)) {
+          maxDay = 31;
+        } else {
+          maxDay = 30;
+        }
 
-    int maxDay;
-    final monthsWith31Days = <int>[1, 3, 5, 7, 8, 10, 12];
+        if (day < 1 || day > maxDay) {
+          emit(const ValidatorState.invalid());
 
-    if (month == 2) {
-      final isLeapYear = (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
-      maxDay = isLeapYear ? 29 : 28;
-    } else if (monthsWith31Days.contains(month)) {
-      maxDay = 31;
-    } else {
-      maxDay = 30;
-    }
+          return;
+        }
 
-    if (day < 1 || day > maxDay) {
-      emit(const ValidatorState.invalid());
+        emit(const ValidatorState.valid());
+      },
+      onError: (error) {
+        emit(const ValidatorState.invalid());
 
-      return;
-    }
-
-    emit(const ValidatorState.valid());
+        return;
+      },
+    );
   }
 }

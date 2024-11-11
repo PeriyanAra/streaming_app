@@ -3,10 +3,12 @@ import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:music_streaming_app/app/restart_widget.dart';
 import 'package:music_streaming_app/core/di/di_get_it_implementation.dart';
 import 'package:music_streaming_app/core/di/register_app_dependencies.dart';
 import 'package:music_streaming_app/gen/strings.g.dart';
+import 'package:sentry/sentry.dart';
 
 Future<void> mainShared(
   Widget appProvider,
@@ -20,6 +22,16 @@ Future<void> mainShared(
         [DeviceOrientation.portraitUp],
       );
 
+      await dotenv.load();
+
+      await Sentry.init(
+        (options) {
+          options
+            ..dsn = dotenv.env['SENTRY_DNS']
+            ..tracesSampleRate = 1.0;
+        },
+      );
+
       FlutterError.onError = (FlutterErrorDetails errorDetails) {
         Zone.current.handleUncaughtError(
           errorDetails.exception,
@@ -29,7 +41,6 @@ Future<void> mainShared(
 
       final di = DiGetItImplementation();
       await registerAppDependencies(di);
-
       runApp(
         RestartWidget(
           child: TranslationProvider(
@@ -42,7 +53,9 @@ Future<void> mainShared(
         ),
       );
     },
-    (error, StackTrace stackTrace) {
+    (error, StackTrace stackTrace) async {
+      await Sentry.captureException(error, stackTrace: stackTrace);
+
       dev.log(
         'An unhandled error!',
         error: error,
