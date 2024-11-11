@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:developer' as dev;
 
-import 'package:dotenv/dotenv.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:music_streaming_app/app/restart_widget.dart';
 import 'package:music_streaming_app/core/di/di_get_it_implementation.dart';
 import 'package:music_streaming_app/core/di/register_app_dependencies.dart';
@@ -21,12 +21,13 @@ Future<void> mainShared(
       await SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp],
       );
-      final env = DotEnv(includePlatformEnvironment: true)..load();
+
+      await dotenv.load();
 
       await Sentry.init(
         (options) {
           options
-            ..dsn = env['SENTRY_DNS']
+            ..dsn = dotenv.env['SENTRY_DNS']
             ..tracesSampleRate = 1.0;
         },
       );
