@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:music_streaming_app/core/core.dart';
 import 'package:music_streaming_app/data/data.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 
 part 'capture_photo_event.dart';
 part 'capture_photo_state.dart';
@@ -45,7 +46,7 @@ class CapturePhotoBloc extends Bloc<CapturePhotoEvent, CapturePhotoState> {
       ),
       failure: (f) => emit(
         CapturePhotoState.error(
-          errorMessage: f.errorMessage ?? 'defaultErrorMessage',
+          errorMessage: f.errorMessage ?? t.defaultErrorMessage,
         ),
       ),
     );
@@ -81,7 +82,7 @@ class CapturePhotoBloc extends Bloc<CapturePhotoEvent, CapturePhotoState> {
           },
           failure: (f) => emit(
             CapturePhotoState.error(
-              errorMessage: f.errorMessage ?? 'defaultErrorMessage',
+              errorMessage: f.errorMessage ?? t.defaultErrorMessage,
               cameraController: state.cameraController,
             ),
           ),
@@ -90,7 +91,7 @@ class CapturePhotoBloc extends Bloc<CapturePhotoEvent, CapturePhotoState> {
       failure: (f) {
         emit(
           CapturePhotoState.error(
-            errorMessage: f.errorMessage ?? 'defaultErrorMessage',
+            errorMessage: f.errorMessage ?? t.defaultErrorMessage,
             cameraController: state.cameraController,
           ),
         );
@@ -125,7 +126,7 @@ class CapturePhotoBloc extends Bloc<CapturePhotoEvent, CapturePhotoState> {
       ),
       failure: (f) => emit(
         CapturePhotoState.error(
-          errorMessage: f.errorMessage ?? 'defaultErrorMessage',
+          errorMessage: f.errorMessage ?? t.defaultErrorMessage,
         ),
       ),
     );

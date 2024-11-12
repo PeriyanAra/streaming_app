@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 import 'package:music_streaming_app/presentation/common/common.dart';
 import 'package:music_streaming_app/presentation/onboarding/theme/theme.dart';
 import 'package:music_streaming_app/presentation/router/app_router.gr.dart';
@@ -33,13 +33,13 @@ class AreYouReadyScreen extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'splashTitle'.tr(),
+                 t.splashTitle,
                   textAlign: TextAlign.center,
                   style: splashScreenTheme.titleTextStyle,
                 ),
                 HBox(height: splashScreenTheme.subtitleTopSpace),
                 Text(
-                  'splashSubtitle'.tr(),
+                  t.splashSubtitle,
                   textAlign: TextAlign.center,
                   style: splashScreenTheme.subtitleTextStyle,
                 ),
@@ -48,7 +48,7 @@ class AreYouReadyScreen extends StatelessWidget {
                   padding: splashScreenTheme.continueButtonPadding,
                   child: PrimaryButton(
                     onTap: () => context.router.push(const OnboardingStepRoute()),
-                    text: 'continueText'.tr(),
+                    text: t.continueText,
                   ),
                 ),
               ],

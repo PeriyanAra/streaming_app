@@ -1,5 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 import 'package:music_streaming_app/presentation/common/widgets/h_box.dart';
 import 'package:music_streaming_app/presentation/setting/theme/setting_theme.dart';
 import 'package:music_streaming_app/presentation/setting/widget/settings_data_helper_class.dart';
@@ -19,7 +19,7 @@ class SettingsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'settings'.tr(),
+          t.settings,
           style: settingTheme.settingSectionTitleTextStyle,
         ),
         HBox(height: settingTheme.titleBottomSpacing),

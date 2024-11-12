@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:music_streaming_app/core/core.dart';
+import 'package:music_streaming_app/gen/strings.g.dart';
 import 'package:sentry/sentry.dart';
 
 base mixin SafeExecutionMixin {
@@ -19,8 +20,8 @@ base mixin SafeExecutionMixin {
       unawaited(Sentry.captureException(error, stackTrace: stackTrace));
 
       final errorMessage = switch (error.code) {
-        'CameraAccessDenied' || 'CameraAccessDeniedWithoutPrompt' => 'cameraAccessDenied',
-        'CameraAccessRestricted' => 'cameraAccessRestricted',
+        'CameraAccessDenied' || 'CameraAccessDeniedWithoutPrompt' => t.cameraAccessDenied,
+        'CameraAccessRestricted' => t.cameraAccessRestricted,
         _ => error.description,
       };
 

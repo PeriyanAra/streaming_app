@@ -1,3 +1,5 @@
+import 'package:music_streaming_app/gen/strings.g.dart';
+
 enum GenderType {
   male('male'),
   female('female'),
@@ -15,5 +17,15 @@ enum GenderType {
     }
 
     return GenderType.other;
+  }
+
+  String translate() {
+    if (this == GenderType.male) {
+      return t.male;
+    } else if (this == GenderType.female) {
+      return t.female;
+    }
+
+    return t.other;
   }
 }

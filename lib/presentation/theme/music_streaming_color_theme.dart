@@ -11,6 +11,7 @@ class MusicStreamingColorTheme extends ThemeExtension<MusicStreamingColorTheme> 
     required this.secondary,
     required this.tertiary,
     required this.backgroundPrimary,
+    required this.error,
   });
 
   final Brightness brightness;
@@ -20,6 +21,8 @@ class MusicStreamingColorTheme extends ThemeExtension<MusicStreamingColorTheme> 
   final MusicStreamingColor tertiary;
 
   final MusicStreamingColor backgroundPrimary;
+
+  final MusicStreamingColor error;
 
   @override
   int get hashCode => Object.hash(
@@ -50,6 +53,7 @@ class MusicStreamingColorTheme extends ThemeExtension<MusicStreamingColorTheme> 
       secondary: secondary ?? this.secondary,
       tertiary: tertiary,
       backgroundPrimary: backgroundPrimary,
+      error: error,
     );
   }
 
@@ -68,6 +72,7 @@ class MusicStreamingColorTheme extends ThemeExtension<MusicStreamingColorTheme> 
       secondary: secondary.lerp(other.secondary, t),
       tertiary: tertiary.lerp(other.tertiary, t),
       backgroundPrimary: backgroundPrimary.lerp(other.backgroundPrimary, t),
+      error: backgroundPrimary.lerp(other.error, t),
     );
   }
 

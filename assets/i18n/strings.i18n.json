@@ -1,12 +1,12 @@
 {
     "splashTitle": "Are you ready for\nyour test?",
     "splashSubtitle": "Start now by creating your profile and connect!",
-    "defaultErrorMessage":"Something went wrong!. Please try again later. If problem not fix connect us 'suporttest@gmail.com'",
-    "cameraAccessDenied":"To use this feature, please go to the Settings app and enable camera access.",
-    "cameraAccessRestricted":"To use this feature, please go to the Settings app and enable camera access.",
+    "defaultErrorMessage": "Something went wrong!. Please try again later. If problem not fix connect us 'suporttest@gmail.com'",
+    "cameraAccessDenied": "To use this feature, please go to the Settings app and enable camera access.",
+    "cameraAccessRestricted": "To use this feature, please go to the Settings app and enable camera access.",
     "continueText": "Continue",
-    "ok":"Ok",
-    "error_header":"Oops, we have an error",
+    "ok": "Ok",
+    "error_header": "Oops, we have an error",
     "birthdayStepTitle": "When’s your\nbirthday?",
     "niknameStepTitle": "Choose your\nnickname",
     "genderStepTitle": "Which gender do\nyou identify as?",
@@ -31,5 +31,6 @@
     "imageGuidelinesTitle": "Make sure that your image",
     "imageGuidelinesFirstText": "Shows your face clearly",
     "imageGuidelinesSecondText": "Yourself only, no group pic",
-    "imageGuidelinesThirdText": "No fake pic, object or someone else"
+    "imageGuidelinesThirdText": "No fake pic, object or someone else",
+    "phoneNotHaveCamera": "Phone not have camera"
 }
