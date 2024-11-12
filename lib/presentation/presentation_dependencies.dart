@@ -4,7 +4,7 @@ import 'package:music_streaming_app/presentation/common/blocs/user_bloc/user_blo
 import 'package:music_streaming_app/presentation/onboarding/cubit/validator_cubit.dart';
 import 'package:music_streaming_app/presentation/setting/settings_bloc/settings_bloc.dart';
 
-final class PresentationDependencies extends Dependencies {
+final class PresentationDependencies implements Dependencies {
   @override
   Future<void> register(DependencyInjection di) async {
     di

@@ -3,7 +3,7 @@ import 'package:music_streaming_app/devices_implementation/camera_service_impl.d
 import 'package:music_streaming_app/devices_implementation/device_implementation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final class DeviceDependencies extends Dependencies {
+final class DeviceDependencies implements Dependencies {
   @override
   Future<void> register(DependencyInjection di) async {
     final appKeyValueStorage = DeviceAppKeyValueStorage(

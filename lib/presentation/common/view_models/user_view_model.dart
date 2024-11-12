@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:music_streaming_app/core/core.dart';
-import 'package:music_streaming_app/data/user/user.dart';
+import 'package:music_streaming_app/data/data.dart';
+
 
 part 'user_view_model.freezed.dart';
 

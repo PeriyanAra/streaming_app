@@ -6,7 +6,7 @@ import 'package:music_streaming_app/data/database/migrations_scripts.dart';
 import 'package:sentry/sentry.dart';
 import 'package:sqflite/sqflite.dart';
 
-abstract class DatabaseCreator {
+abstract final class DatabaseCreator {
   static Future<Database> initDatabase() async {
     final commwellDbPath = await getDatabasePath(dbName: 'commwell_db');
 

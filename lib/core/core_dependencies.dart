@@ -1,6 +1,6 @@
 import 'package:music_streaming_app/core/core.dart';
 
-class CoreDependencies extends Dependencies {
+final class CoreDependencies implements Dependencies {
   @override
   Future<void> register(DependencyInjection di) async {
     di

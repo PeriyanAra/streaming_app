@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:music_streaming_app/core/enums/gender_type.dart';
+import 'package:music_streaming_app/core/core.dart';
 
 part 'user_dto.freezed.dart';
 part 'user_dto.g.dart';
