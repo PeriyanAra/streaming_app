@@ -3,13 +3,14 @@ import 'package:music_streaming_app/presentation/common/common.dart';
 
 class InputField extends StatefulWidget {
   const InputField({
-    super.key,
     required this.textEditingController,
     required this.focusNode,
     required this.keyboardType,
-    required this.maxLength, 
+    required this.maxLength,
+    this.hasError = false,
     this.onChanged,
     this.textAlign = TextAlign.center,
+    super.key,
   });
 
   final TextEditingController textEditingController;
@@ -18,6 +19,7 @@ class InputField extends StatefulWidget {
   final TextInputType keyboardType;
   final int maxLength;
   final TextAlign textAlign;
+  final bool hasError;
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -41,8 +43,8 @@ class _InputFieldState extends State<InputField> {
       textAlign: widget.textAlign,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
-        enabledBorder: inputTheme.enabledBorder,
-        focusedBorder: inputTheme.enabledBorder,
+        enabledBorder: widget.hasError ? inputTheme.errorBorder : inputTheme.enabledBorder,
+        focusedBorder: widget.hasError ? inputTheme.errorBorder : inputTheme.enabledBorder,
         contentPadding: inputTheme.contentPadding,
         fillColor: inputTheme.backgroundColor,
         filled: true,

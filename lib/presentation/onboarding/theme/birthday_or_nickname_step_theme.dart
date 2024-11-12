@@ -15,6 +15,7 @@ class BirthdayOrNicknameStepTheme extends ThemeExtension<BirthdayOrNicknameStepT
   double get yearFieldWidth => 103.0;
   double get fieldSpace => 20.0;
   double get bottomTextTopSpace => 5.0;
+  double get errorMessageTopSpace => 6.0;
 
   TextStyle get bottomTextStyle => _textTheme.bodyLarge.copyWith(
         color: _colorTheme.secondary,

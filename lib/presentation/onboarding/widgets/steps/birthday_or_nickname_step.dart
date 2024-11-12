@@ -10,6 +10,7 @@ import 'package:music_streaming_app/presentation/onboarding/theme/birthday_or_ni
 import 'package:music_streaming_app/presentation/onboarding/theme/theme.dart';
 import 'package:music_streaming_app/presentation/onboarding/widgets/steps_indicator.dart';
 import 'package:music_streaming_app/presentation/onboarding/widgets/widgets.dart';
+import 'package:music_streaming_app/presentation/theme/music_streaming_color_theme.dart';
 
 class BirthdayOrNicknameStep extends StatefulWidget {
   const BirthdayOrNicknameStep({
@@ -45,6 +46,7 @@ class _BirthdayOrNicknameStepState extends State<BirthdayOrNicknameStep> {
     final birthdayStepTheme = BirthdayOrNicknameStepTheme.of(context);
     final di = DiGetItImplementation();
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+    final colors = MusicStreamingColorTheme.of(context);
 
     return SafeArea(
       child: Padding(
@@ -65,13 +67,9 @@ class _BirthdayOrNicknameStepState extends State<BirthdayOrNicknameStep> {
                   _nicknameController.text,
                 );
               }
-            } else if (state is ValidatorinvalidState && context.mounted) {
-              DialogHelper.show(
-                context,
-                title: widget.isBirthdayStep ? t.invalidDate : t.invalidNickname,
-                buttonText: t.ok,
-              );
 
+              errorText = '';
+            } else if (state is ValidatorinvalidState && context.mounted) {
               errorText = widget.isBirthdayStep ? t.invalidDate : t.invalidNickname;
             }
           },
@@ -99,83 +97,142 @@ class _BirthdayOrNicknameStepState extends State<BirthdayOrNicknameStep> {
                     ),
                     if (widget.isBirthdayStep) ...{
                       Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Column(
                             children: [
-                              SizedBox(
-                                width: birthdayStepTheme.dayMonthFieldWidth,
-                                child: InputField(
-                                  keyboardType: TextInputType.number,
-                                  textEditingController: _dayController,
-                                  focusNode: _dayFocusNode,
-                                  onChanged: (value) {
-                                    if (value.length >= 2) {
-                                      _dayFocusNode.nextFocus();
-                                    }
-                                  },
-                                  maxLength: 2,
+                              Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      SizedBox(
+                                        width: birthdayStepTheme.dayMonthFieldWidth,
+                                        child: InputField(
+                                          keyboardType: TextInputType.number,
+                                          textEditingController: _dayController,
+                                          focusNode: _dayFocusNode,
+                                          hasError: errorText.isNotEmpty,
+                                          onChanged: (value) {
+                                            if (value.length >= 2) {
+                                              _dayFocusNode.nextFocus();
+                                            }
+
+                                            setState(() {
+                                              errorText = '';
+                                            });
+                                          },
+                                          maxLength: 2,
+                                        ),
+                                      ),
+                                      HBox(height: birthdayStepTheme.bottomTextTopSpace),
+                                      Text(
+                                        t.day,
+                                        style: birthdayStepTheme.bottomTextStyle.copyWith(
+                                          color: errorText.isNotEmpty ? colors.error : null,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  WBox(width: birthdayStepTheme.fieldSpace),
+                                  Column(
+                                    children: [
+                                      SizedBox(
+                                        width: birthdayStepTheme.dayMonthFieldWidth,
+                                        child: InputField(
+                                          keyboardType: TextInputType.number,
+                                          textEditingController: _monthController,
+                                          focusNode: _monthFocusNode,
+                                          maxLength: 2,
+                                          hasError: errorText.isNotEmpty,
+                                          onChanged: (value) {
+                                            if (value.length >= 2) {
+                                              _monthFocusNode.nextFocus();
+                                            }
+                                            setState(() {
+                                              errorText = '';
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      HBox(height: birthdayStepTheme.bottomTextTopSpace),
+                                      Text(
+                                        t.month,
+                                        style: birthdayStepTheme.bottomTextStyle.copyWith(
+                                          color: errorText.isNotEmpty ? colors.error : null,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  WBox(width: birthdayStepTheme.fieldSpace),
+                                  Column(
+                                    children: [
+                                      SizedBox(
+                                        width: birthdayStepTheme.yearFieldWidth,
+                                        child: InputField(
+                                          keyboardType: TextInputType.number,
+                                          textEditingController: _yearController,
+                                          focusNode: _yearFocusNode,
+                                          hasError: errorText.isNotEmpty,
+                                          maxLength: 4,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              errorText = '';
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      HBox(height: birthdayStepTheme.bottomTextTopSpace),
+                                      Text(
+                                        t.year,
+                                        style: birthdayStepTheme.bottomTextStyle.copyWith(
+                                          color: errorText.isNotEmpty ? colors.error : null,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              if (errorText.isNotEmpty) ...{
+                                HBox(height: birthdayStepTheme.errorMessageTopSpace),
+                                Center(
+                                  child: Text(
+                                    errorText,
+                                    style: birthdayStepTheme.bottomTextStyle.copyWith(
+                                      color: colors.error,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              HBox(height: birthdayStepTheme.bottomTextTopSpace),
-                              Text(
-                                t.day,
-                                style: birthdayStepTheme.bottomTextStyle,
-                              ),
-                            ],
-                          ),
-                          WBox(width: birthdayStepTheme.fieldSpace),
-                          Column(
-                            children: [
-                              SizedBox(
-                                width: birthdayStepTheme.dayMonthFieldWidth,
-                                child: InputField(
-                                  keyboardType: TextInputType.number,
-                                  textEditingController: _monthController,
-                                  focusNode: _monthFocusNode,
-                                  maxLength: 2,
-                                  onChanged: (value) {
-                                    if (value.length >= 2) {
-                                      _monthFocusNode.nextFocus();
-                                    }
-                                  },
-                                ),
-                              ),
-                              HBox(height: birthdayStepTheme.bottomTextTopSpace),
-                              Text(
-                                t.month,
-                                style: birthdayStepTheme.bottomTextStyle,
-                              ),
-                            ],
-                          ),
-                          WBox(width: birthdayStepTheme.fieldSpace),
-                          Column(
-                            children: [
-                              SizedBox(
-                                width: birthdayStepTheme.yearFieldWidth,
-                                child: InputField(
-                                  keyboardType: TextInputType.number,
-                                  textEditingController: _yearController,
-                                  focusNode: _yearFocusNode,
-                                  maxLength: 4,
-                                ),
-                              ),
-                              HBox(height: birthdayStepTheme.bottomTextTopSpace),
-                              Text(
-                                t.year,
-                                style: birthdayStepTheme.bottomTextStyle,
-                              ),
+                              },
                             ],
                           ),
                         ],
                       ),
-                    } else
+                    } else ...{
                       InputField(
                         keyboardType: TextInputType.text,
                         textEditingController: _nicknameController,
                         focusNode: _nicknameFocusNode,
                         maxLength: 20,
                         textAlign: TextAlign.start,
+                        hasError: errorText.isNotEmpty,
+                        onChanged: (value) {
+                          setState(() {
+                            errorText = '';
+                          });
+                        },
                       ),
+                      if (errorText.isNotEmpty) ...{
+                        HBox(height: birthdayStepTheme.errorMessageTopSpace),
+                        Center(
+                          child: Text(
+                            errorText,
+                            style: birthdayStepTheme.bottomTextStyle.copyWith(
+                              color: colors.error,
+                            ),
+                          ),
+                        ),
+                      },
+                    },
                   ],
                 ),
                 Positioned(

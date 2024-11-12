@@ -108,6 +108,9 @@ class MusicStreamingTheme {
       backgroundPrimary: MusicStreamingColor(
         MusicStreamingColorsPalette.black.value,
       ),
+      error: MusicStreamingColor(
+        MusicStreamingColorsPalette.red.value,
+      ),
     );
   }
 }

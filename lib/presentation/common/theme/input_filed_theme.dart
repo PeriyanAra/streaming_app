@@ -18,6 +18,13 @@ class InputFieldTheme extends ThemeExtension<InputFieldTheme> {
         borderRadius: BorderRadius.circular(15.0),
       );
 
+  OutlineInputBorder get errorBorder => OutlineInputBorder(
+        borderSide: BorderSide(
+          color: _colorTheme.error,
+        ),
+        borderRadius: BorderRadius.circular(15.0),
+      );
+
   TextStyle get primaryTextStyle => _textTheme.displaySmall.copyWith(
         color: _colorTheme.primary,
         fontSize: 25.0,
